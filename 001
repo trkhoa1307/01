@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANG KHOA MOD</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Exo+2:wght@600;700;800&display=swap');
+
+        body {
+            font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a1328; 
+            color: #e8eefc; 
+        }
+
+        /* ----- NAVBAR ----- */
+        .navbar {
+            background-color: #050914;
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ff7a28; 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px; 
+            cursor: pointer;
+        }
+
+        .badge-dk {
+            background: linear-gradient(145deg, rgba(47,123,255,0.4), #0b1325);
+            border: 1px solid rgba(47,123,255,0.6);
+            color: #ffffff;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px; 
+            display: grid;
+            place-items: center;
+        }
+
+        .logo-title {
+            color: #ffffff;
+            font-size: 19px;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #8da0c4;
+            text-decoration: none;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: #ff7a28; 
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; 
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ff7a28;
+        }
+
+        /* ----- MAIN & LAYOUT ----- */
+        main {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            color: #8da0c4;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Cơ chế Màn hình */
+        .screen {
+            display: none; 
+            animation: fadeIn 0.4s ease;
+        }
+        .screen.active {
+            display: block; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ----- MÀN HÌNH 1: CHỌN GAME ----- */
+        .game-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .game-card {
+            background: linear-gradient(160deg, rgba(47,123,255,0.2), #0b1325);
+            border: 1px solid rgba(47,123,255,0.5);
+            border-radius: 26px;
+            padding: 18px 12px 16px;
+            width: 250px;
+            text-align: center;
+            text-decoration: none; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            cursor: pointer;
+        }
+
+        .game-card.ff {
+            border-color: rgba(255,122,40,0.8);
+            box-shadow: 0 0 15px rgba(255,122,40,0.2);
+        }
+        .game-card.ff:hover {
+            transform: translateY(-2px); 
+            border-color: rgba(255,122,40,1);
+            box-shadow: 0 0 34px rgba(255,122,40,0.5); 
+        }
+
+        .game-card.lq {
+            border-color: rgba(47,123,255,0.8);
+            box-shadow: 0 0 15px rgba(47,123,255,0.2);
+        }
+        .game-card.lq:hover {
+            transform: translateY(-2px); 
+            border-color: rgba(47,123,255,1);
+            box-shadow: 0 0 34px rgba(47,123,255,0.5); 
+        }
+
+        .game-card img {
+            width: 140px; 
+            height: 140px;
+            border-radius: 22px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 18px rgba(0,0,0,0.6);
+        }
+
+        .game-card h3 {
+            margin: 10px 0 5px 0;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .game-card p {
+            font-size: 12.5px;
+            color: #8da0c4;
+            margin: 0;
+        }
+
+        /* ----- MÀN HÌNH 2 & 3: KHUNG SẢN PHẨM ----- */
+        .btn-back {
+            display: inline-block;
+            background-color: transparent;
+            color: #8da0c4;
+            border: 1px solid #1f2d4a;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-back:hover {
+            color: white;
+            border-color: #ff7a28;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            background-color: #12224a;
+            border: 1px solid #1f2d4a;
+            border-radius: 15px;
+            width: 280px;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        /* Thẻ sản phẩm màu cam (Cho Mod) */
+        .product-card.orange:hover {
+            transform: translateY(-5px);
+            border-color: #ff7a28;
+            box-shadow: 0 0 20px rgba(255,122,40,0.3);
+        }
+
+        /* Thẻ sản phẩm màu xanh (Cho Acc) */
+        .product-card.blue:hover {
+            transform: translateY(-5px);
+            border-color: #2f7bff;
+            box-shadow: 0 0 20px rgba(47,123,255,0.3);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 2px solid #1f2d4a;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-info h3 {
+            margin: 0 0 10px 0;
+            color: white;
+            font-size: 20px;
+            font-family: 'Exo 2', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .product-info .desc {
+            color: #8da0c4;
+            font-size: 14px;
+            margin: 0 0 15px 0;
+            line-height: 1.5;
+            flex-grow: 1; 
+        }
+
+        .product-info .price {
+            font-size: 18px;
+            font-weight: 800;
+            font-family: 'Exo 2', sans-serif;
+            margin: 0 0 15px 0;
+        }
+
+        /* Nút bấm Cam */
+        .btn-download {
+            background: linear-gradient(90deg, #ff7a28, #e55300);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: 'Exo 2', sans-serif;
+            transition: 0.3s;
+            display: block;
+        }
+        .btn-download:hover {
+            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(255,122,40,0.5);
+        }
+
+        /* Nút bấm Xanh (Dành cho mua Acc) */
+        .btn-buy {
+            background: linear-gradient(90deg, #2f7bff, #1c49cc);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: 'Exo 2', sans-serif;
+            transition: 0.3s;
+            display: block;
+        }
+        .btn-buy:hover {
+            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(47,123,255,0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: transparent;
+            color: #8da0c4;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a onclick="showScreen('screen-home')" class="logo-box">
+            <div class="badge-dk">DK</div>
+            <div class="logo-title">DANG KHOA</div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#" class="active" onclick="showScreen('screen-home')">Trang chủ</a>
+            <!-- Đã đổi chữ Hướng dẫn thành Liên hệ và thêm link Zalo -->
+            <a href="https://zalo.me/0332858452" target="_blank">Liên hệ</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- MÀN HÌNH 1: TRANG CHỦ -->
+        <div id="screen-home" class="screen active">
+            <div class="section-title">
+                <h2>CỬA HÀNG</h2>
+                <p>Chọn dịch vụ bạn muốn</p>
+            </div>
+
+            <section class="game-grid">
+                <!-- THẺ MOD GAME -->
+                <div onclick="showScreen('screen-ff')" class="game-card ff">
+                    <img src="https://i.postimg.cc/0y15rdTh/naruto-ff.jpg" alt="Free Fire Mod">
+                    <h3>MOD FREE FIRE</h3>
+                    <p>FF thường · FF MAX</p>
+                </div>
+
+                <!-- THẺ BÁN ACC -->
+                <div onclick="showScreen('screen-acc-ff')" class="game-card lq">
+                    <img src="https://i.postimg.cc/0y15rdTh/naruto-ff.jpg" alt="Acc Free Fire">
+                    <h3>ACC FREE FIRE</h3>
+                    <p>Acc Siêu VIP · Giá Rẻ</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- MÀN HÌNH 2: KHUNG SẢN PHẨM MOD FREE FIRE -->
+        <div id="screen-ff" class="screen">
+            <button class="btn-back" onclick="showScreen('screen-home')">‹ Quay lại Trang chủ</button>
+
+            <div class="section-title">
+                <h2 style="color: #ff7a28;">CỬA HÀNG MOD</h2>
+                <p>Chọn bản Mod bạn muốn tải về</p>
+            </div>
+
+            <div class="product-grid">
+                <!-- Sản phẩm 1: AIM NECK -->
+                <div class="product-card orange">
+                    <img src="https://i.postimg.cc/LYMZ0GN3/af674dca.jpg" alt="Aim Neck">
+                    <div class="product-info">
+                        <h3>AIM NECK</h3>
+                        <p class="desc">Aim neck hỗ trợ ghim đầu 90% giúp kéo tâm chuẩn xác, an toàn anti band đến khi band :)</p>
+                        <p class="price" style="color: #ff7a28;">MIỄN PHÍ</p> 
+                        <a href="https://www.mediafire.com/file/w8hygvd35tqnpuv/neck+ffth.3105/file" target="_blank" class="btn-download">TẢI VỀ NGAY</a>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm 2: CHAMS SÚNG + KEO -->
+                <div class="product-card orange">
+                    <img src="https://i.postimg.cc/dZV3bFdC/17e8df08.jpg" alt="Chams Súng Keo">
+                    <div class="product-info">
+                        <h3>CHAMS SÚNG + KEO</h3>
+                        <p class="desc">Giúp bạn khai mở con mắt thứ 3 có thể nhìn thấy địch ở trong keo và sau vật cản.</p>
+                        <p class="price" style="color: #ff7a28;">MIỄN PHÍ</p> 
+                        <a href="https://www.mediafire.com/file/59aurkw1w2kshuv/DVI+SÚNG+7+MÀU+FFTH.3105/file" target="_blank" class="btn-download">TẢI VỀ NGAY</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MÀN HÌNH 3: SHOP ACC FREE FIRE -->
+        <div id="screen-acc-ff" class="screen">
+            <button class="btn-back" onclick="showScreen('screen-home')">‹ Quay lại Trang chủ</button>
+
+            <div class="section-title">
+                <h2 style="color: #2f7bff;">SHOP ACC FREE FIRE</h2>
+                <p>Tài khoản giá rẻ, uy tín, giao dịch tự động</p>
+            </div>
+
+            <div class="product-grid">
+                <!-- Sản phẩm Acc 1 -->
+                <div class="product-card blue">
+                    <img src="https://i.postimg.cc/JhsC7sTm/image.png" alt="Acc VIP">
+                    <div class="product-info">
+                        <h3>#001</h3>
+                        <p class="desc">chi tiết xin liên hệ admin</p>
+                        <p class="price" style="color: #2f7bff;">3.200.000 VNĐ</p> 
+                        <a href="https://zalo.me/0332858452" target="_blank" class="btn-buy">MUA NGAY</a>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm Acc 2 -->
+                <div class="product-card blue">
+                    <img src="https://i.postimg.cc/Qt5L5RZ8/image.png" alt="Acc Random">
+                    <div class="product-info">
+                        <h3>#002</h3>
+                        <p class="desc">chi tiết xin liên hệ admin</p>
+                        <p class="price" style="color: #2f7bff;">2.300.000 VNĐ</p> 
+                        <a href="https://zalo.me/0332858452" target="_blank" class="btn-buy">MUA NGAY</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 DANG KHOA MOD.</p>
+    </footer>
+
+    <!-- JS CHUYỂN TRANG -->
+    <script>
+        function showScreen(screenId) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(function(screen) {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
